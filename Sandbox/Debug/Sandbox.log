@@ -1,7 +1,3 @@
 ﻿  Sandbox.cpp
-c:\users\ignacio.fernandez\documents\visual studio 2015\projects\sandbox\sandbox\sandbox.cpp(84): warning C4800: 'void *': forcing value to bool 'true' or 'false' (performance warning)
-  c:\users\ignacio.fernandez\documents\visual studio 2015\projects\sandbox\sandbox\sandbox.cpp(78): note: while compiling class template member function 'bool KennyKerr::unique_handle<KennyKerr::invalid_handle_traits>::reset(void *) throw()'
-  c:\users\ignacio.fernandez\documents\visual studio 2015\projects\sandbox\sandbox\sandbox.cpp(302): note: see reference to function template instantiation 'bool KennyKerr::unique_handle<KennyKerr::invalid_handle_traits>::reset(void *) throw()' being compiled
-  c:\users\ignacio.fernandez\documents\visual studio 2015\projects\sandbox\sandbox\sandbox.cpp(265): note: see reference to class template instantiation 'KennyKerr::unique_handle<KennyKerr::invalid_handle_traits>' being compiled
   Sandbox.vcxproj -> C:\Users\ignacio.fernandez\documents\visual studio 2015\Projects\Sandbox\Debug\Sandbox.exe
   Sandbox.vcxproj -> C:\Users\ignacio.fernandez\documents\visual studio 2015\Projects\Sandbox\Debug\Sandbox.pdb (Full PDB)

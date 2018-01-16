@@ -28,6 +28,9 @@ namespace KennyKerr
 			}
 		}
 
+		unique_handle(unique_handle const &);
+		auto operator=(unique_handle const &)->unique_handle &;
+
 	public:
 
 		explicit unique_handle(pointer value = Traits::invalid()) throw(): 
@@ -38,10 +41,13 @@ namespace KennyKerr
 		unique_handle(unique_handle && other) throw() :
 		m_value { other.release() }
 		{
+
+			TRACE(L"move ctor\n");
 		}
 
 		auto operator=(unique_handle && other) throw() -> unique_handle &
 		{
+			TRACE(L"move assignment\n");
 			if (this != &other)
 			{
 				reset(other.release());
@@ -52,6 +58,7 @@ namespace KennyKerr
 
 		~unique_handle() noexcept
 		{
+			TRACE(L"destructor\n");
 			close();
 		}
 
@@ -83,7 +90,62 @@ namespace KennyKerr
 			}
 			return static_cast<bool>(m_value);
 		}
+
+		auto swap(unique_handle<Traits> &other) throw() -> void
+		{
+			std::swap(m_value, other.m_value);
+		}
 	};
+
+	template <typename Traits>
+	auto swap(unique_handle<Traits> & left,
+		unique_handle<Traits> & right) throw() -> void
+	{
+		TRACE(L"nonmember swap\n");
+		left.swap(right);
+	}
+
+	template<typename Traits>
+	auto operator==(unique_handle<Traits> const & left,
+					unique_handle<Traits> const & right) throw () -> bool 
+	{
+		return left.get == right.get();
+	}
+
+	template<typename Traits>
+	auto operator!=(unique_handle<Traits> const & left,
+		unique_handle<Traits> const & right) throw () -> bool
+	{
+		return left.get != right.get();
+	}
+
+	template<typename Traits>
+	auto operator>(unique_handle<Traits> const & left,
+				   unique_handle<Traits> const & right) throw () -> bool
+	{
+		return left.get > right.get();
+	}
+
+	template<typename Traits>
+	auto operator<(unique_handle<Traits> const & left,
+				   unique_handle<Traits> const & right) throw () -> bool
+	{
+		return left.get < right.get();
+	}
+
+	template<typename Traits>
+	auto operator>=(unique_handle<Traits> const & left,
+					unique_handle<Traits> const & right) throw () -> bool
+	{
+		return left.get >= right.get();
+	}
+
+	template<typename Traits>
+	auto operator<=(unique_handle<Traits> const & left,
+					unique_handle<Traits> const & right) throw () -> bool
+	{
+		return left.get <= right.get();
+	}
 
 	struct null_handle_traits
 	{
@@ -120,10 +182,12 @@ namespace KennyKerr
 }
 
 #include <utility>
+#include <algorithm>
 
 using namespace std;
 using namespace KennyKerr;
 
+/*
 struct work_deleter
 {
 	typedef PTP_WORK pointer;
@@ -141,10 +205,11 @@ struct map_view_deleter
 	{
 		VERIFY(UnmapViewOfFile(value));
 	}
-};
+}; */
 
 auto main() -> int
 {
+	/*
 	typedef unique_ptr<PTP_WORK, work_deleter> work;
 
 	auto w = work
@@ -314,5 +379,7 @@ auto main() -> int
 		return 0;
 	}
 
-	printf("%.*s\n", static_cast<unsigned>(size.QuadPart), view.get());
+	printf("%.*s\n", static_cast<unsigned>(size.QuadPart), view.get());*/
+
+	
 }
